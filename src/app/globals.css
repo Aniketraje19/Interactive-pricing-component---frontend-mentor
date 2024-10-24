@@ -5,19 +5,136 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --soft-cyan:hsl(174, 77%, 80%);
+  --strong-cyan:hsl(174, 86%, 45%);
+  --light-grayish-blue:hsl(224, 65%, 95%);
+  --background-image: url('/static/patterns/bg-pattern.svg');
 }
 
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --background-image: url('/static/patterns/bg-pattern-dark.svg');
   }
+  
 }
 
+html{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 15px;
+}
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  width: 100%;
+  /* background-image:var(--background-image); */
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: 100% auto;
+}
+
+.title{
+  height: 150px;
+  background: url('/static/patterns/pattern-circles.svg') center no-repeat;
+}
+
+
+.range-slider{
+  
+  background-color: var(--light-grayish-blue);
+  border-radius: 8px;
+  height: 8px;
+  width: 100%;
+  outline: none;
+  transition: all 450ms ease-in;
+-webkit-appearance: none;
+appearance: none;
+}
+
+
+.range-slider::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: url('/static/icons/icon-slider.svg') rgb(16, 213, 194) center no-repeat;
+  box-shadow: 0px 5px 10px 0px var(--strong-cyan);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  
+  background-color:rgb(27, 230, 209);
+}
+
+.range-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+ 
+}
+
+.checkbox {
+  
+  width: 50px;  /* Adjust width as needed */
+  height: 15px; /* Adjust height as needed */
+  position: relative;
+  z-index: 100000000000;
+  opacity: 0; 
+  cursor: pointer;
+}
+
+.slide{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsl(223, 50%, 87%);
+  transition: 0.2s;
+  cursor:pointer;
+}
+
+.slide:hover{
+  background-color: hsl(174, 77%, 80%);
+}
+
+.slide::before{
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 3px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+.checkbox:checked + .slide{
+  background-color: hsl(174, 86%, 45%);
+}
+
+.checkbox:focus + .slide {
+  box-shadow: 0 0 1px hsl(174, 86%, 45%);
+}
+
+.checkbox:checked + .slide:before {
+  transform: translateX(24px);
+}
+
+
+.check-icons li{
+list-style-image: url('/static/icons/icon-check.svg');
+margin: .5rem;
 }
 
 @layer utilities {
